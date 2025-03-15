@@ -34,8 +34,6 @@ public class Line {
       direction = -1;
     }
     angleFactor += ANGLE_STEP * direction;
-    endX = (int) (startX + length * Math.cos(angleFactor * Math.PI));
-    endY = (int) (startY + length * Math.sin(angleFactor * Math.PI));
 
   }
 
@@ -85,6 +83,9 @@ public class Line {
   }
 
   public void paintSelf(Graphics g) {
+    endX = (int) (startX + length * Math.cos(angleFactor * Math.PI));
+    endY = (int) (startY + length * Math.sin(angleFactor * Math.PI));
+
     System.out.println("Drawing line from (" + startX + "," + startY + ") to (" + endX + "," + endY + ")");
     g.setColor(Color.RED);
     g.drawLine(startX, startY, endX, endY);

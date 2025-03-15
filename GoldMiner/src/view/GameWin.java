@@ -4,6 +4,8 @@ import controller.GameController;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import javax.swing.JFrame;
 import javax.swing.Timer;
 
@@ -24,14 +26,20 @@ public class GameWin extends JFrame {
     setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     setVisible(true);
 
-    // set time, update every 16 millisecond
-    Timer timer = new Timer(16, new ActionListener() {
+    addMouseListener(new MouseAdapter() {
       @Override
-      public void actionPerformed(ActionEvent e) {
+      public void mouseClicked(MouseEvent e) {
+        if(e.getButton() == MouseEvent.BUTTON1) {
+          gameController.startGrabbing();
+        }
+      }
+    });
+
+    // set time, update every 16 millisecond
+    Timer timer = new Timer(16, e-> {
         System.out.println("Timer triggered");
         gameController.update();
         repaint();
-      }
     });
     timer.start();
     System.out.println("Timer started");
